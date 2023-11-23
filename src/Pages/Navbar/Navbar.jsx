@@ -2,18 +2,18 @@
 
 import { Link, NavLink } from "react-router-dom";
 import userDefaultPic from "../../assets/user.png";
-import useAuth from "../../Components/hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
   const { user, logOut } = useAuth()
 
-  const handleSignOut = () => {
-    logOut()
-      .then((result) => {
-        console.log("user sign out", result);
-      })
-      .catch((error) => console.error(error));
-  };
+  // const handleSignOut = () => {
+  //   logOut()
+  //     .then((result) => {
+  //       console.log("user sign out", result);
+  //     })
+  //     .catch((error) => console.error(error));
+  // };
 
   return (
     <div className="border-b   ">
@@ -117,7 +117,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       {user ? (
-                        <button onClick={handleSignOut} className="btn btn-sm">
+                        <button onClick={logOut} className="btn btn-sm">
                           Sign Out
                         </button>
                       ) : (
@@ -246,7 +246,7 @@ const Navbar = () => {
                   </button>
                 </li>
                 <li>
-                  <button onClick={handleSignOut} className="btn btn-sm">
+                  <button onClick={logOut} className="btn btn-sm">
                     Sign Out
                   </button>
                 </li>
@@ -260,7 +260,7 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:flex">
           {user ? (
-            <button onClick={handleSignOut} className="btn btn-sm">
+            <button onClick={logOut} className="btn btn-sm">
               Sign Out
             </button>
           ) : (

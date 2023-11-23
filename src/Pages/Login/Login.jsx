@@ -1,93 +1,150 @@
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
-import { Link, useLocation, useNavigate } from "react-router-dom";
-
-
-import { useContext, useState } from "react";
-// import useAuth from "../../Components/hooks/useAuth";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { FcGoogle } from 'react-icons/fc'
+import useAuth from '../../hooks/useAuth';
+import { getToken, saveUser } from '../../api/auth';
+// import toast from 'react-hot-toast';
+import { TbFidgetSpinner } from 'react-icons/tb';
+import { toast } from 'react-toastify';
 
 const Login = () => {
-  const {logIn} = useContext(AuthContext);
-  // const {logIn} = useContext(AuthContext)
+  const {    signIn, signInWithGoogle, loading} =useAuth();
+  const navigate = useNavigate();
   const location = useLocation();
-  // const navigate = useNavigate()
-  console.log('location in the login page', location);
- 
-  const navigate = useNavigate()
-  const [error,setError] =useState('')
+  const from = location?.state?.from?.pathname || "/"
+  console.log(location?.state?.from?.pathname);
 
-    const handleLogin=(e)=>{
-      e.preventDefault();
-      const email = e.target.email.value;
-      const password = e.target.password.value;
-      
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    
 
-      logIn(email,password)
-      .then(result=>{
-        console.log(result.user);
-          
-        //navigate after login
-        navigate(location?.state ? location.state : '/')
+  try{
+   
+    //user login
+    const result =await signIn(email, password)
 
-     toast.success("Login successfully");
+    //get token
+    await getToken(result?.user?.email)
+    navigate(from,{replace: true})
+    toast.success('Login Successful')
 
-      })
-      .catch(error=>{
-        // setError('Wrong password')
-        setError(error.message)
-        console.error(error)
-      })
+  } catch(error){
+    console.log(error);
+    toast.error(error?.message);
+   }
+  };
+
+  const handleGoogleSignIn = async () =>{
+    try{
+      //user register using google
+      const result =await signInWithGoogle()
+
+      // save user data in database
+      const dbResponse = await saveUser(result?.user)
+      console.log(dbResponse);
+  
+      //get token
+      await getToken(result?.user?.email)
+      navigate(location?.state?.from?.pathname || "/", {replace:true})
+      toast.success('Signup Successful')
+  
+    }catch(error){
+      console.log(error);
+      toast.error(error?.message);
     }
+  }
+
   return (
-    <div className="mt-12 lg:mt-16">
-      
-      <h2 className="text-3xl text-center font-semibold">Please Login </h2>
-      <div className="w-1/2 mx-auto">
-        <form onSubmit={handleLogin} className="card-body">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              type="email"
-              name="email"
-              placeholder="email"
-              className="input input-bordered"
-              required
-            />
+    <div className='flex justify-center items-center min-h-screen'>
+      <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
+        <div className='mb-8 text-center'>
+          <h1 className='my-3 text-4xl font-bold'>Log In</h1>
+          <p className='text-sm text-gray-400'>
+            Sign in to access your account
+          </p>
+        </div>
+        <form
+        onSubmit={handleSubmit}
+          noValidate=''
+          action=''
+          className='space-y-6 ng-untouched ng-pristine ng-valid'
+        >
+          <div className='space-y-4'>
+            <div>
+              <label htmlFor='email' className='block mb-2 text-sm'>
+                Email address
+              </label>
+              <input
+                type='email'
+                name='email'
+                id='email'
+                required
+                placeholder='Enter Your Email Here'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                data-temp-mail-org='0'
+              />
+            </div>
+            <div>
+              <div className='flex justify-between'>
+                <label htmlFor='password' className='text-sm mb-2'>
+                  Password
+                </label>
+              </div>
+              <input
+                type='password'
+                name='password'
+                autoComplete='current-password'
+                id='password'
+                required
+                placeholder='*******'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+              />
+            </div>
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Password</span>
-            </label>
-            <input
-              type="password"
-              name="password"
-              placeholder="password"
-              className="input input-bordered"
-              required
-            />
-            <label className="label">
-              <a href="#" className="label-text-alt link link-hover">
-                Forgot password?
-              </a>
-            </label>
-          </div>
-          <p className="text-red-500">{error}</p>
-          <div className="form-control mt-6">
-            <button className="btn btn-primary">Login</button>
-            
-            <p>you do not have account? 
-                <Link to="/register" className="text-red-400 p-4">Register</Link>
-            </p>
+
+          <div>
+            <button
+              type='submit'
+              className='bg-rose-500 w-full rounded-md py-3 text-white'
+            >
+              {loading ? <TbFidgetSpinner className="animate-spin m-auto"></TbFidgetSpinner>
+               : 'Continue'}
+            </button>
           </div>
         </form>
-      </div>
-      <ToastContainer></ToastContainer>
-    </div>
-  );
-};
+        <div className='space-y-1'>
+          <button className='text-xs hover:underline hover:text-rose-500 text-gray-400'>
+            Forgot password?
+          </button>
+        </div>
+        <div className='flex items-center pt-4 space-x-1'>
+          <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
+          <p className='px-3 text-sm dark:text-gray-400'>
+            Login with social accounts
+          </p>
+          <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
+        </div>
+        <div onClick={handleGoogleSignIn}
+         className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+          <FcGoogle size={32} />
 
-export default Login;
+          <p>Continue with Google</p>
+        </div>
+        <p className='px-6 text-sm text-center text-gray-400'>
+          Don&apos;t have an account yet?{' '}
+          <Link
+            to='/signup'
+            className='hover:underline hover:text-rose-500 text-gray-600'
+          >
+            Sign up
+          </Link>
+          .
+        </p>
+      </div>
+    </div>
+  )
+}
+
+export default Login
