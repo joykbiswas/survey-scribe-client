@@ -4,6 +4,10 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 // import Register from "../Pages/SignUp/SignUp";
 import SignUp from "../Pages/SignUp/SignUp";
+import Dashboard from "../Layout/Dashboard";
+import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
+import PrivateRoute from "./PrivateRoute";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +28,20 @@ const router = createBrowserRouter([
         }
       ]
     },
+    {
+      path: 'dashboard',
+      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+      children: [
+        {
+          path: 'admin-home',
+          element:<AdminHome></AdminHome>
+        },
+        {
+          path: 'manage-users',
+          element: <ManageUsers></ManageUsers>
+        }
+      ]
+    }
     
   ]);
 

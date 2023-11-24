@@ -61,7 +61,7 @@ const Navbar = () => {
                     
                     <li>
                       <NavLink
-                        to="/add_job"
+                        to="/dashboard"
                         className={({ isActive, isPending }) =>
                           isPending
                             ? "pending"
@@ -70,7 +70,7 @@ const Navbar = () => {
                             : "text-xl"
                         }
                       >
-                        Add Job
+                       Dashboard
                       </NavLink>
                     </li>
                     <li>
@@ -156,7 +156,7 @@ const Navbar = () => {
                   {/* ----end----- */}
                   <li>
                     <NavLink
-                      to="/add_job"
+                      to="/dashboard"
                       className={({ isActive, isPending }) =>
                         isPending
                           ? "pending"
@@ -165,7 +165,7 @@ const Navbar = () => {
                           : " text-xl "
                       }
                     >
-                      Add Job
+                      Dashboard
                     </NavLink>
                   </li>
                   <li>

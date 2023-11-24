@@ -1,176 +1,147 @@
+import { useContext } from "react";
+import { Helmet } from "react-helmet";
+import { useForm, } from "react-hook-form"
+// import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import { imageUpload } from "../../api/utils";
-import useAuth from "../../hooks/useAuth";
-import { getToken, saveUser, } from "../../api/auth";
-// import toast from "react-hot-toast";
-import { TbFidgetSpinner } from "react-icons/tb";
-import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+
+
 
 const SignUp = () => {
-  const {    createUser, updateUserProfile, signInWithGoogle, loading} =useAuth();
-  const navigate = useNavigate()
+    const  axiosPublic = useAxiosPublic();
+    const { register, handleSubmit,reset, formState: { errors }} = useForm()
+    const navigate =useNavigate();
+    const {createUser, updateUserprofile} =useContext(AuthContext)
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    const image = form.image.files[0];
-    const imageData = await imageUpload(image)
-    console.log(imageData);
+      const onSubmit = (data) => {
+        console.log(data)
+        createUser(data.email, data.password)
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            updateUserprofile(data.name, data.photoURL)
+            .then(() =>{
+              // create user entry in the database;
+              const userInfo = {
+                name: data.name,
+                email: data.email
+              }
+              axiosPublic.post('/users', userInfo)
+              .then(res =>{
+                if(res.data.insertedId) {
+                  console.log('user added to the database');
+                  reset();
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User created successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  navigate('/')
+                }
+              })
 
-  try{
-    // upload img
-    const imageData = await imageUpload(image)
 
-    //user register
-    const result =await createUser(email, password)
-
-    // save username & profile photo
-    await updateUserProfile(name, imageData?.data?.display_url)
-    console.log(result);
-
-    // save user data in database
-    const dbResponse = await saveUser(result?.user)
-    console.log(dbResponse);
-
-    //get token
-    await getToken(result?.user?.email)
-    navigate('/')
-    toast.success('Signup Successful')
-
-  } catch(error){
-    console.log(error);
-    toast.error(error?.message);
-   }
-  };
-
-  const handleGoogleSignIn = async () =>{
-    try{
-      //user register using google
-      const result =await signInWithGoogle()
-
-      // save user data in database
-      const dbResponse = await saveUser(result?.user)
-      console.log(dbResponse);
-  
-      //get token
-      await getToken(result?.user?.email)
-      navigate('/')
-      toast.success('Signup Successful')
-  
-    }catch(error){
-      console.log(error);
-      toast.error(error?.message);
-    }
-  }
-
+            })
+            .catch(error=>{console.error(error)})
+        })
+      }
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
-        <div className="mb-8 text-center">
-          <h1 className="my-3 text-4xl font-bold animate-pulse">Sign Up</h1>
-          <p className="text-sm text-gray-400">Welcome to StayVista</p>
-        </div>
-        <form
-          onSubmit={handleSubmit}
-          noValidate=""
-          action=""
-          className="space-y-6 ng-untouched ng-pristine ng-valid"
-        >
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block mb-2 text-sm">
-                Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Enter Your Name Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
-                data-temp-mail-org="0"
-              />
-            </div>
-            <div>
-              <label htmlFor="image" className="block mb-2 text-sm">
-                Select Image:
-              </label>
-              <input
-                required
-                type="file"
-                id="image"
-                name="image"
-                accept="image/*"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block mb-2 text-sm">
-                Email address
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                required
-                placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
-                data-temp-mail-org="0"
-              />
-            </div>
-            <div>
-              <div className="flex justify-between">
-                <label htmlFor="password" className="text-sm mb-2">
-                  Password
+    <div>
+        <Helmet>
+            <title>Bistro Boss | Sign Up</title>
+        </Helmet>
+      <div className="hero min-h-screen   bg-base-200">
+        <div className="hero-content flex-col ">
+          <div className="text-center lg:text-left">
+            <h1 className="text-5xl font-bold">Sign Up now!</h1>
+            {/* <p className="py-6">
+              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
+              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
+              et a id nisi.
+            </p> */}
+          </div>
+          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <form onSubmit={handleSubmit(onSubmit)}
+             className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="name" {...register("name" , { required: true })}
+
+                 
+                  placeholder="type your name"
+                  className="input input-bordered"
+                  
+                />
+                {errors.name && <span className="text-red-500">Name is required</span>}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input
+                  type="name" {...register("photoURL" , { required: true })}
+
+                  placeholder="photo URL"
+                  className="input input-bordered"
+                  
+                />
+                {errors.photoURL && <span className="text-red-500">photo URL is required</span>}
+              </div>
+              
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="email"
+                  {...register("email", { required: true })}
+                  name="email"
+                  placeholder=" type your email"
+                  className="input input-bordered"
+                  
+                />
+                {errors.email && <span className="text-red-500">Email is required</span>}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  type="password"
+                  {...register("password", { required: true, minLength:8, maxLength: 20, pattern:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/ })}
+                  placeholder="password"
+                  name="password"
+                  className="input input-bordered"
+                  
+                />
+                {errors.password?.type === 'required' && <span className="text-red-500">Password is required</span>}
+                {errors.password?.type === 'minLength' && <p className="text-red-500">Password must be 8 character</p>}
+                {errors.password?.type === 'maxLength' && <p className="text-red-500">Password must be less then 20 character</p>}
+                {errors.password?.type === 'pattern' && <p className="text-red-500">Password must be one upper case, one lower case,one number and one special character</p>}
+                <label className="label">
+                  <a href="#" className="label-text-alt link link-hover">
+                    Forgot password?
+                  </a>
                 </label>
               </div>
-              <input
-                type="password"
-                name="password"
-                autoComplete="new-password"
-                id="password"
-                required
-                placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
-              />
-            </div>
+              <div className="form-control mt-6">
+                <input className="btn btn-primary" type="submit" value="Sign Up" />
+              </div>
+            </form>
+            <SocialLogin></SocialLogin>
+            <p className='pb-4 pl-4'><>Already have an account <Link className='text-red-400' to='/login'>Login</Link></></p>
+
           </div>
 
-          <div>
-            <button
-              type="submit"
-              className="bg-rose-500 w-full rounded-md py-3 text-white"
-            >
-              {loading ? <TbFidgetSpinner className="animate-spin m-auto"></TbFidgetSpinner>
-               : 'Continue'}
-            </button>
-          </div>
-        </form>
-        <div className="flex items-center pt-4 space-x-1">
-          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
-          <p className="px-3 text-sm dark:text-gray-400">
-            Signup with social accounts
-          </p>
-          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <div onClick={handleGoogleSignIn}
-         className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer">
-          <FcGoogle size={32} />
-
-          <p>Continue with Google</p>
-        </div>
-        <p className="px-6 text-sm text-center text-gray-400">
-          Already have an account?{" "}
-          <Link
-            to="/login"
-            className="hover:underline hover:text-rose-500 text-gray-600"
-          >
-            Login
-          </Link>
-          .
-        </p>
       </div>
     </div>
   );

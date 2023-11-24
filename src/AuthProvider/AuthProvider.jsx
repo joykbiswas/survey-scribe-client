@@ -1,88 +1,80 @@
 /* eslint-disable react/prop-types */
-import { createContext, useEffect, useState } from 'react'
-import {
-  GoogleAuthProvider,
-  createUserWithEmailAndPassword,
-  getAuth,
-  onAuthStateChanged,
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  signOut,
-  updateProfile,
-} from 'firebase/auth'
-// import { app } from '../Components/firebase'
-import { clearCookie } from '../api/auth'
-import app from '../Components/firebase/firebase.config'
+import { createContext, useEffect, useState } from "react";
 
-export const AuthContext = createContext(null)
-const auth = getAuth(app)
-const googleProvider = new GoogleAuthProvider()
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+// import { app } from "../firebase/firebase.config";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import app from "../Components/firebase/firebase.config";
 
-const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+export const AuthContext = createContext(null);
+const auth = getAuth(app);
 
-  const createUser = (email, password) => {
-    setLoading(true)
-    return createUserWithEmailAndPassword(auth, email, password)
-  }
+const AuthProvider = ({children}) => {
+   const [user, setUser] = useState(null);
+   const [loading, setLoading] = useState(true);
+   const googleProvider = new GoogleAuthProvider();
+   const axiosPublic = useAxiosPublic();
+   
+   const createUser =(email, password) =>{
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email,password)
+   }
 
-  const signIn = (email, password) => {
-    setLoading(true)
-    return signInWithEmailAndPassword(auth, email, password)
-  }
+   const signIn =(email,password) =>{
+    setLoading(true);
+    return signInWithEmailAndPassword(auth,email, password);
+   }
+   const googleSignIn = () =>{
+    setLoading(true);
+    return signInWithPopup(auth,googleProvider)
+   }
 
-  const signInWithGoogle = () => {
-    setLoading(true)
-    return signInWithPopup(auth, googleProvider)
-  }
-
-  const resetPassword = email => {
-    setLoading(true)
-    return sendPasswordResetEmail(auth, email)
-  }
-
-  const logOut = async () => {
-    setLoading(true)
-    await clearCookie()
-    return signOut(auth)
-  }
-
-  const updateUserProfile = (name, photo) => {
+   const logOut =() =>{
+    setLoading(true);
+    return signOut(auth);
+   }
+   const updateUserprofile = (name, photo) =>{
     return updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: photo,
+        displayName:name, photoURL: photo
     })
-  }
+   }
+    useEffect(() =>{
+    const unsubscribe = onAuthStateChanged(auth, currentUser =>{
+        setUser(currentUser);
+        console.log('current user', currentUser);
+        if(currentUser){
+            //get token and store client
+            const userInfo = {email: currentUser.email}
+            axiosPublic.post('/jwt', userInfo)
+            .then(res=>{
+                if(res.data.token){
+                    localStorage.setItem('access-token', res.data.token);
+                    setLoading(false);
+                }
+            })
 
-  // onAuthStateChange
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentUser => {
-      setUser(currentUser)
-      console.log('CurrentUser-->', currentUser)
-      setLoading(false)
-    })
-    return () => {
-      return unsubscribe()
+        }
+        else{
+            // remove token
+            localStorage.removeItem('access-token');
+            setLoading(false);
+        }
+        
+
+    },)
+    return() =>{
+        return unsubscribe();
     }
-  }, [])
+   },[axiosPublic])
 
-  const authInfo = {
-    user,
-    loading,
-    setLoading,
-    createUser,
-    signIn,
-    signInWithGoogle,
-    resetPassword,
-    logOut,
-    updateUserProfile,
-  }
+    const authInfo = {
+        user,loading, createUser, signIn, logOut, updateUserprofile, googleSignIn
+    }
+    return (
+        <AuthContext.Provider value={authInfo}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
 
-  return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
-  )
-}
-
-export default AuthProvider
+export default AuthProvider;
