@@ -4,8 +4,13 @@ import { Link, NavLink } from "react-router-dom";
 import userDefaultPic from "../../assets/user.png";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/logo.png"
+import useAdmin from "../../hooks/useAdmin";
+import useSurveyor from "../../hooks/useSurveyor";
+  
 const Navbar = () => {
   const { user, logOut } = useAuth()
+  const [isAdmin] = useAdmin();
+  const [isSurveyor] =useSurveyor();
 
   // const handleSignOut = () => {
   //   logOut()
@@ -17,7 +22,7 @@ const Navbar = () => {
 
   return (
     <div className="border-b   ">
-      <div className="navbar  justify-between my-3">
+      <div className="navbar  justify-between ">
         <div className="navbar-start ">
           <div className="dropdown ">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -89,7 +94,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       <NavLink
-                        to="/my_bids"
+                        to="/pricing"
                         className={({ isActive, isPending }) =>
                           isPending
                             ? "pending"
@@ -98,7 +103,7 @@ const Navbar = () => {
                             : "text-xl"
                         }
                       >
-                        My Bids
+                        Pricing
                       </NavLink>
                     </li>
                     <li>
@@ -129,7 +134,7 @@ const Navbar = () => {
               </div>
             </ul>
           </div>
-          <div className=" w-52 border ">
+          <div className=" w-52">
             <img src={logo} alt="" />
           </div>
         </div>
@@ -154,7 +159,9 @@ const Navbar = () => {
                   </li>
 
                   {/* ----end----- */}
-                  <li>
+                  {
+                    isAdmin || isSurveyor ?<>
+                    <li>
                     <NavLink
                       to="/dashboard"
                       className={({ isActive, isPending }) =>
@@ -168,6 +175,9 @@ const Navbar = () => {
                       Dashboard
                     </NavLink>
                   </li>
+                    </>
+                    : ''
+                  }
                   <li>
                     <NavLink
                       to="/survey"
@@ -184,7 +194,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/my_bids"
+                      to="/pricing"
                       className={({ isActive, isPending }) =>
                         isPending
                           ? "pending"
@@ -193,7 +203,7 @@ const Navbar = () => {
                           : " text-xl "
                       }
                     >
-                      My Bids
+                      Pricing
                     </NavLink>
                   </li>
                   <li>

@@ -9,11 +9,12 @@ const CreateSurvey = () => {
     const category = form.category.value;
     const like = form.like.value;
     const dislike = form.dislike.value;
+    const option = form.option.value;
     const description = form.description.value;
 
-    const timestamp = new Date().toISOString();
+    // const timestamp = new Date().toISOString();
 
-    const addSurvey = {title,category,like,dislike,description, timestamp}
+    const addSurvey = {title,category,like,dislike,description, option }
     console.log(addSurvey);
     fetch('http://localhost:5000/survey',{
       method: 'POST',
@@ -44,7 +45,7 @@ const CreateSurvey = () => {
           <div className="md:flex ">
             <div className="form-control md:w-1/2">
               <label className="label">
-                <span className="label-text">title</span>
+                <span className="label-text">Title</span>
               </label>
               <label className="input-group">
                 <input
@@ -74,6 +75,7 @@ const CreateSurvey = () => {
                 <option>Food and Dining</option>
                 <option>Research & Education</option>
                 <option>Entertainment</option>
+                <option>Work and Career</option>
                 required
               </select>
             </div>
@@ -111,6 +113,26 @@ const CreateSurvey = () => {
             </div>
           </div>
           {/* form row 4*/}
+          <div className="form-control md:w-1/2 ">
+              <label className="label">
+                <span className="label-text">Option</span>
+              </label>
+
+              <select
+                className="select select-bordered join-item"
+                type="category"
+                name="option"
+              >
+                <option disabled selected>
+                  Option
+                </option>
+                <option>Yes</option>
+                <option>No</option>
+                
+                required
+              </select>
+            </div>
+
           <div className="mb-4 ">
             <div className="form-control md:w-full">
               <label className="label">
@@ -128,7 +150,7 @@ const CreateSurvey = () => {
               </label>
             </div>
           </div>
-          <input type="hidden" name="timestamp" value={new Date().toISOString()} />
+          {/* <input type="hidden" name="timestamp" value={new Date().toISOString()} /> */}
           <input
             type="submit"
             value="Add"

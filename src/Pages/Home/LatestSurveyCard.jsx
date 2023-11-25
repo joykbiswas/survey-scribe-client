@@ -2,7 +2,7 @@
 import { GrLike } from "react-icons/gr";
 import { GrDislike } from "react-icons/gr";
 
-const SurveyCard = ({ survey }) => {
+const LatestSurveyCard = ({ survey }) => {
   const {  title, category, description, like, dislike, timestamp } =
     survey;
   console.log(survey);
@@ -28,4 +28,4 @@ const SurveyCard = ({ survey }) => {
   );
 };
 
-export default SurveyCard;
+export default LatestSurveyCard;
