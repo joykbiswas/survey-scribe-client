@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Jane Doe",
+        "details": "Survey Scribe has revolutionized our market research efforts. The intuitive interface and robust analytics tools make gathering and analyzing data a breeze. Our team can now make informed decisions faster than ever before!",
+        "rating": 4
+    },
+    {
+        "name": "Mark T",
+        "details": "As a small business owner, Survey Scribe has been a game-changer for understanding our customers. The platform is user-friendly, and the customization options allowed us to tailor surveys to our specific needs. The insights gained have directly influenced our business strategy",
+        "rating": 2
+    },
+    {
+        "name": "MJ Doe",
+        "details": "Survey Scribe is an invaluable tool for employee feedback. The anonymity feature encourages honest responses, and the reporting features help us identify trends over time. It has become an essential part of our employee engagement strategy.",
+        "rating": 5
+    },
+    {
+        "name": "Sarah Smith",
+        "details": "I've used Survey Scribe for academic research projects, and it has exceeded my expectations. The platform's flexibility in survey design and the ability to export data for in-depth analysis.Highly recommended! ",
+        "rating": 4
+    },
+    {
+        "name": "Robert Johnson",
+        "details": "Survey Scribe simplified our event feedback process. Creating surveys for attendees was a breeze, and the real-time feedback allowed us to make on-the-fly adjustments. It's a must-have for anyone organizing events or gatherings!",
+        "rating": 5
+    }
+]

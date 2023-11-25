@@ -3,6 +3,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaRegRectangleList } from "react-icons/fa6";
 import { MdOutlinePayment } from "react-icons/md";
 import { ImStatsBars } from "react-icons/im";
+import { SiCheckmarx } from "react-icons/si";
+import { MdOutlineFeedback } from "react-icons/md";
 import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
@@ -11,6 +13,7 @@ const Dashboard = () => {
         <div className="flex">
             <div className="w-64 min-h-screen bg-orange-400 ">
                 <ul className="menu p-4">
+                    
                     {
                         isAdmin ? <>
                            <li> 
@@ -32,7 +35,7 @@ const Dashboard = () => {
                         </>
                         : <>
                          <li> 
-                        <NavLink to= '/dashboard/create-survey'> <FaHome></FaHome> 
+                        <NavLink to= '/dashboard/create-survey'> <SiCheckmarx /> 
                         Create Survey</NavLink>
                     </li>
                     <li> 
@@ -40,7 +43,7 @@ const Dashboard = () => {
                         Survey Details</NavLink>
                     </li>
                     <li> 
-                        <NavLink to= '/dashboard/feedback'> <FaHome></FaHome> 
+                        <NavLink to= '/dashboard/feedback'> <MdOutlineFeedback /> 
                         Feedback</NavLink>
                     </li>
 

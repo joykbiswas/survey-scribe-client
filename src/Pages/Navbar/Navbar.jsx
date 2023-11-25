@@ -3,7 +3,7 @@
 import { Link, NavLink } from "react-router-dom";
 import userDefaultPic from "../../assets/user.png";
 import useAuth from "../../hooks/useAuth";
-
+import logo from "../../assets/logo.png"
 const Navbar = () => {
   const { user, logOut } = useAuth()
 
@@ -129,8 +129,8 @@ const Navbar = () => {
               </div>
             </ul>
           </div>
-          <div className=" w-56  ">
-            <img src="https://i.ibb.co/Kw2yntK/market-logo.png" alt="" />
+          <div className=" w-52 border ">
+            <img src={logo} alt="" />
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
