@@ -8,6 +8,7 @@ import Dashboard from "../Layout/Dashboard";
 import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
 import PrivateRoute from "./PrivateRoute";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
+import CreateSurvey from "../Pages/Dashboard/Surveyor/CreateSurvey";
 
 const router = createBrowserRouter([
     {
@@ -39,6 +40,12 @@ const router = createBrowserRouter([
         {
           path: 'manage-users',
           element: <ManageUsers></ManageUsers>
+        },
+        // surveyor router
+
+        {
+          path:'create-survey',
+          element: <CreateSurvey></CreateSurvey>
         }
       ]
     }

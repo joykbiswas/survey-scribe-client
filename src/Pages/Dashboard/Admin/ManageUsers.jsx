@@ -22,7 +22,7 @@ const ManageUsers = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: `${user.name} is an Admin now !`,
+                title: `${user.name} is an Surveyor now !`,
                 showConfirmButton: false,
                 timer: 1500
               });
@@ -84,7 +84,7 @@ const ManageUsers = () => {
                 <td>{user.email}</td>
                 <td>
                   {
-                    user.role === 'admin' ? 'Admin' : <button
+                    user.role === 'surveyor' ? 'Surveyor' : <button
                     onClick={() => handleMakeAdmin(user)}
                     className="btn  btn-lg bg-orange-500 hover:bg-slate-500"
                   >
