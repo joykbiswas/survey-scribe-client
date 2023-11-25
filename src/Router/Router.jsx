@@ -9,6 +9,7 @@ import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
 import PrivateRoute from "./PrivateRoute";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import CreateSurvey from "../Pages/Dashboard/Surveyor/CreateSurvey";
+import Survey from "../Pages/Survey/Survey";
 
 const router = createBrowserRouter([
     {
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
       children:[
         {
             path:'/',
-            element:<Home></Home>
+            element:<Home></Home>,
+            loader: () =>fetch('http://localhost:5000/survey')
         },
         {
             path: '/login',
@@ -26,6 +28,11 @@ const router = createBrowserRouter([
         {
             path: '/signup',
             element: <SignUp></SignUp>
+        },
+        {
+          path: 'survey',
+          element:<Survey></Survey>,
+          loader: () =>fetch('http://localhost:5000/survey')
         }
       ]
     },

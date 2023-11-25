@@ -1,10 +1,45 @@
+import Swal from "sweetalert2";
 
 const CreateSurvey = () => {
-    return (
-        <div>
-            <div className="bg-[#fbf3de] max-w-full mx-auto  p-24">
+  const   handleAddSurvey = (event) =>{
+    event.preventDefault();
+
+    const form =event.target;
+    const title = form.title.value;
+    const category = form.category.value;
+    const like = form.like.value;
+    const dislike = form.dislike.value;
+    const description = form.description.value;
+
+    const timestamp = new Date().toISOString();
+
+    const addSurvey = {title,category,like,dislike,description, timestamp}
+    console.log(addSurvey);
+    fetch('http://localhost:5000/survey',{
+      method: 'POST',
+      headers: {
+        "content-type": "application/json",
+      },
+      body:JSON.stringify(addSurvey),
+    })
+    .then((res) =>res.json())
+    .then((data) =>{
+      console.log(data);
+      if(data.insertedId){
+        Swal.fire({
+          title: "success!",
+          text: "user added job successfully",
+          icon: "success",
+          confirmButtonText: "Add survey",
+        });
+      }
+    })
+  }
+  return (
+    <div>
+      <div className="bg-[#fbf3de] max-w-full mx-auto  p-24">
         <h2 className="text-3xl font-bold">Create Survey</h2>
-        <form >
+        <form onSubmit={handleAddSurvey}>
           {/* form row 1*/}
           <div className="md:flex ">
             <div className="form-control md:w-1/2">
@@ -34,14 +69,16 @@ const CreateSurvey = () => {
                 <option disabled selected>
                   category
                 </option>
-                <option>Health</option>
-                <option>Food</option>
-                <option>graphics design</option>
+                <option>Market Research</option>
+                <option>Health and Wellness</option>
+                <option>Food and Dining</option>
+                <option>Research & Education</option>
+                <option>Entertainment</option>
                 required
               </select>
             </div>
           </div>
-          
+
           {/* form row 3*/}
           <div className="md:flex ">
             <div className="form-control md:w-1/2">
@@ -52,7 +89,7 @@ const CreateSurvey = () => {
                 <input
                   type="text"
                   name="like"
-                  placeholder="..."
+                  placeholder=""
                   className="input input-bordered w-full "
                   required
                 />
@@ -60,13 +97,13 @@ const CreateSurvey = () => {
             </div>
             <div className="form-control md:w-1/2 ml-4">
               <label className="label">
-                <span className="label-text">Option</span>
+                <span className="label-text">Dislike</span>
               </label>
               <label className="input-group">
                 <input
                   type="text"
-                  name="option"
-                  placeholder="option"
+                  name="dislike"
+                  placeholder=""
                   className="input input-bordered w-full"
                   required
                 />
@@ -84,13 +121,14 @@ const CreateSurvey = () => {
                 <input
                   type=""
                   name="description"
-                  placeholder="Enter job description"
+                  placeholder="Enter survey description"
                   className="input input-bordered w-full "
                   required
                 />
               </label>
             </div>
           </div>
+          <input type="hidden" name="timestamp" value={new Date().toISOString()} />
           <input
             type="submit"
             value="Add"
@@ -98,8 +136,8 @@ const CreateSurvey = () => {
           />
         </form>
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default CreateSurvey;

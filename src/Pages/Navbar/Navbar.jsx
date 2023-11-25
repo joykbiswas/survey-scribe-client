@@ -75,7 +75,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       <NavLink
-                        to="/myPosted_jobs"
+                        to="/survey"
                         className={({ isActive, isPending }) =>
                           isPending
                             ? "pending"
@@ -84,7 +84,7 @@ const Navbar = () => {
                             : "text-xl"
                         }
                       >
-                        My Posted Jobs
+                        Our Survey
                       </NavLink>
                     </li>
                     <li>
@@ -170,7 +170,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/myPosted_jobs"
+                      to="/survey"
                       className={({ isActive, isPending }) =>
                         isPending
                           ? "pending"
@@ -179,7 +179,7 @@ const Navbar = () => {
                           : " text-xl "
                       }
                     >
-                      My Posted Jobs
+                      Our Survey
                     </NavLink>
                   </li>
                   <li>

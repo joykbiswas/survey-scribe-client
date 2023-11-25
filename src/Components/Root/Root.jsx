@@ -8,7 +8,7 @@ const Root = () => {
     console.log(location);
     const noHeaderFooter = location.pathname.includes('/login') || location.pathname.includes('register')
     return (
-        <div className="max-w-screen-lg mx-auto">
+        <div className="max-w-screen-xl mx-auto">
             { noHeaderFooter|| <Navbar></Navbar>}
             <Outlet></Outlet>
             { noHeaderFooter|| <Footer></Footer>}
