@@ -60,25 +60,3 @@ const PricingCard = ({option}) => {
 };
 
 export default PricingCard;
-
-/*
-  pro  user 
-<div className="  max-w-sm mx-auto bg-white hover:shadow-2xl  overflow-hidden border rounded-tl-3xl rounded-br-3xl border-x-indigo-500 border-y-indigo-500">
-        <div className="px-6 py-4">
-          <h2 className="text-4xl font-bold text-gray-800 mb-2">Pro User</h2>
-          <p className="text-xl text-gray-700 mb-14">$100 per month</p>
-          <p className="text-xl  text-gray-600 ">
-            Access to exclusive Pro features
-          </p>
-          <p className="text-xl  text-gray-600 ">Unlimited post comments</p>
-          <p className="text-xl  text-gray-600 ">Unlimited post likes</p>
-        </div>
-        <div className="px-6 pt-4 pb-2">
-          <Link to='/payment'>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mb-7">
-            Subscribe to Pro
-          </button>
-          </Link>
-        </div>
-      </div>
-*/

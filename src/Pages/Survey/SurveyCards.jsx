@@ -8,8 +8,8 @@ const SurveyCards = ({ survey }) => {
   console.log(survey);
   return (
     <div>
-      <div className="">
-        <div className="card  bg-base-100 shadow-xl">
+      <div className="max-w-sm mx-auto bg-white hover:shadow-2xl  overflow-hidden border rounded-tl-3xl rounded-br-3xl border-x-indigo-500 border-y-indigo-500">
+        <div className="card  bg-base-100 ">
           <div className="card-body">
             <h2 className="card-title">{title}</h2>
             <h3> {category}</h3>

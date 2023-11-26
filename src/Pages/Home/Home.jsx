@@ -5,6 +5,7 @@ import { useLoaderData } from "react-router-dom";
 // import SurveyCard from "./SurveyCard";
 // import Survey from "./LatestSurvey";
 import LatestSurvey from "./LatestSurvey";
+import Qna from "./Qna";
 
 const Home = () => {
   const surveys = useLoaderData();
@@ -18,6 +19,7 @@ const Home = () => {
       <LatestSurvey></LatestSurvey>
      
       <Testimonials ></Testimonials>
+      <Qna></Qna>
     </div>
   );
 };

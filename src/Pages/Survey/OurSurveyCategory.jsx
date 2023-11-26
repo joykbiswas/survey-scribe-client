@@ -13,7 +13,7 @@ const OurSurveyCategory = ({ setSelectedCategory }) => {
 
   return (
     <div>
-      <div className="form-control md:w-1/2 ml-4">
+      <div className="form-control md:w-1/2 ml-4 my-7">
         <label className="label">
           <span className="label-text">Filter by Category</span>
         </label>

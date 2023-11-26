@@ -11,9 +11,9 @@ const LatestSurvey = () => {
     axiosSecure("/survey").then((res) => setSurveys(res.data));
   }, []);
   return (
-    <div>
-        <div>
-            
+    <div className="my-16">
+        <div className="mb-7">
+            <h3 className="text-6xl font-bold text-center">Latest Survey </h3>
         </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {surveys.map((survey) => (

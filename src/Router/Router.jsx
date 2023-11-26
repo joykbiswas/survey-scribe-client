@@ -11,6 +11,8 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import CreateSurvey from "../Pages/Dashboard/Surveyor/CreateSurvey";
 import OurSurvey from "../Pages/Survey/OurSurvey";
 import Pricing from "../Pages/Pricing/Pricing";
+import SurveyDetails from "../Components/SurveryDetails/SurveyDetails";
+// import SurveyDetails from "../Components/SurveryDetails/SurveyDetails";
 // import Payment from "../Pages/Dashboard/Payment/Payment";
 
 const router = createBrowserRouter([
@@ -41,10 +43,12 @@ const router = createBrowserRouter([
           element: <Pricing></Pricing>,
           loader:()=>fetch('/price.json')
         },
-        // {
-        //   path: 'payment',
-        //   element: <Payment></Payment>
-        // }
+        {
+          path: "/details/:id",
+          element:<SurveyDetails></SurveyDetails>,
+          loader:({params}) =>fetch(`http://localhost:5000/survey/${params.id}`)
+        }
+        
       ]
     },
     {

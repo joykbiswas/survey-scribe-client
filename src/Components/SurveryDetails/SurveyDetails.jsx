@@ -1,12 +1,10 @@
-/* eslint-disable react/prop-types */
-import { GrLike } from "react-icons/gr";
-import { GrDislike } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { GrDislike, GrLike } from "react-icons/gr";
+import { useLoaderData } from "react-router-dom";
 
-const LatestSurveyCard = ({ survey }) => {
-  const { _id, title, category, description, like, dislike, timestamp } =
-    survey;
-  // console.log(survey);
+const SurveyDetails = () => {
+  const surveys = useLoaderData();
+  const { category, description, dislike, like, option, title } = surveys;
+  console.log(surveys);
   return (
     <div>
       <div className=" max-w-sm mx-auto bg-white hover:shadow-2xl  overflow-hidden border rounded-tl-3xl rounded-br-3xl border-x-indigo-500 border-y-indigo-500">
@@ -16,13 +14,21 @@ const LatestSurveyCard = ({ survey }) => {
             <h3> {category}</h3>
             <p>{description}</p>
             <div className="flex justify-start  gap-4">
-              <button className="text-xl  "><span><GrLike className="" />{like}</span></button>
-              <button className="text-xl  "><h4><GrDislike />{dislike}</h4></button>
+              <button className="text-xl  ">
+                <span>
+                  <GrLike className="" />
+                  {like}
+                </span>
+              </button>
+              <button className="text-xl  ">
+                <h4>
+                  <GrDislike />
+                  {dislike}
+                </h4>
+              </button>
             </div>
             <div className="card-actions justify-end">
-            <Link to={`/details/${_id}`}>
               <button className="btn btn-primary">Details</button>
-              </Link>
             </div>
           </div>
         </div>
@@ -31,4 +37,4 @@ const LatestSurveyCard = ({ survey }) => {
   );
 };
 
-export default LatestSurveyCard;
+export default SurveyDetails;
