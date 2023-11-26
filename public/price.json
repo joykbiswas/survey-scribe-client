@@ -1,0 +1,25 @@
+[
+    {
+        "ID": "001",
+        "Name": "User",
+        "Features": [
+            "Unlimited use",
+            " Access to exclusive all features",
+            "Unlimited post likes"
+        ],
+        "Price": "00 ",
+        "Button": "Free"
+    },
+    {
+        "ID": "002",
+        "Name": "Pro User",
+        "Features": [
+            "Access to exclusive Pro features",
+            "Unlimited post comments",
+            "Unlimited post likes"
+        ],
+        "Price": "50",
+        "Button": "Pro User"
+    }
+    
+]

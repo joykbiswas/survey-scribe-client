@@ -11,6 +11,7 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import CreateSurvey from "../Pages/Dashboard/Surveyor/CreateSurvey";
 import OurSurvey from "../Pages/Survey/OurSurvey";
 import Pricing from "../Pages/Pricing/Pricing";
+// import Payment from "../Pages/Dashboard/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -37,8 +38,13 @@ const router = createBrowserRouter([
         },
         {
           path:'pricing',
-          element: <Pricing></Pricing>
-        }
+          element: <Pricing></Pricing>,
+          loader:()=>fetch('/price.json')
+        },
+        // {
+        //   path: 'payment',
+        //   element: <Payment></Payment>
+        // }
       ]
     },
     {
