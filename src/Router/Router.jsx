@@ -12,6 +12,8 @@ import CreateSurvey from "../Pages/Dashboard/Surveyor/CreateSurvey";
 import OurSurvey from "../Pages/Survey/OurSurvey";
 import Pricing from "../Pages/Pricing/Pricing";
 import SurveyDetails from "../Components/SurveryDetails/SurveyDetails";
+import PaymentHistory from "../Pages/Dashboard/Admin/PaymentHistory";
+import SurveyStatus from "../Pages/Dashboard/Admin/SurveyStatus";
 // import SurveyDetails from "../Components/SurveryDetails/SurveyDetails";
 // import Payment from "../Pages/Dashboard/Payment/Payment";
 
@@ -62,6 +64,14 @@ const router = createBrowserRouter([
         {
           path: 'manage-users',
           element: <ManageUsers></ManageUsers>
+        },
+        {
+          path:'survey-status',
+          element:<SurveyStatus></SurveyStatus>
+        },
+        {
+          path: 'payment-history',
+          element: <PaymentHistory></PaymentHistory>
         },
         // surveyor router
 

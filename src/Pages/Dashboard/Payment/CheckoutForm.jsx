@@ -3,15 +3,16 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import {  useEffect, useState } from 'react'
 import './CheckoutForm.css'
 // import useAuth from '../../hooks/useAuth'
+import { toast } from 'react-toastify'
 import { ImSpinner9 } from 'react-icons/im'
-// import { createPaymentIntent, saveBookingInfo, updateStatus } from '../../api/bookings'
-// import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../../../hooks/useAuth'
-import { createPaymentIntent, saveBookingInfo } from '../../../api/payment'
-import { toast } from 'react-toastify'
+import { createPaymentIntent, saveBookingInfo, updateProUser,  } from '../../../api/payment'
+
+// import Swal from 'sweetalert2'
 
 const CheckoutForm = ({ bookingInfo, closeModal, }) => {
+  // const axiosSecure = useAxiosSecure();
   const stripe = useStripe()
   const elements = useElements()
   const { user } = useAuth()
@@ -31,6 +32,24 @@ const CheckoutForm = ({ bookingInfo, closeModal, }) => {
           })
         }
     },[bookingInfo])
+
+    // const handleProUser = user =>{
+    //   axiosSecure.patch(`/users/proUser/${user._id}`)
+    //   .then(res =>{
+    //     console.log(res.data);
+    //     if(res.data.modifiedCount > 0){
+    //       // refetch();
+    //       Swal.fire({
+    //           position: "top-end",
+    //           icon: "success",
+    //           title: `${user.name} is an Surveyor now !`,
+    //           showConfirmButton: false,
+    //           timer: 1500
+    //         });
+    //   }
+
+    //   })
+    // }
   
   
     const handleSubmit = async event => {
@@ -91,9 +110,13 @@ const CheckoutForm = ({ bookingInfo, closeModal, }) => {
         // save payment info to the server
         await saveBookingInfo(paymentInfo)
         // await updateStatus(bookingInfo.roomId, true)
-        const text = `Payment Successful! ${paymentIntent.id}`
-        toast.success(text);
+        console.log("bookingInfo",bookingInfo);
+        await updateProUser(bookingInfo.email)
+        const text = `Payment Successful! ${paymentIntent.id} `
+        
         navigate('/')
+        toast.success(text);
+        toast.success("You are now Pro-user")
       }catch (err){
         console.log(err);
         toast.error(err.message)

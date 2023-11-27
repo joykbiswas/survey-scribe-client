@@ -1,12 +1,31 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import { GrLike } from "react-icons/gr";
 import { GrDislike } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const LatestSurveyCard = ({ survey }) => {
-  const { _id, title, category, description, like, dislike, timestamp } =
+  const { _id, title, category, description, like, dislike,  } =
     survey;
+
   // console.log(survey);
+  const axiosSecure = useAxiosSecure();
+  const [likeCount, setLikeCount] = useState(0);
+  const [disLikeCount , setDisLikeCount] = useState(0);
+
+  const handleLikeClick = () =>{
+    setLikeCount(likeCount +1);
+    
+    axiosSecure.patch(`/survey/like/${_id}`)
+    
+  }
+
+  const handleDisLikeClick = () =>{
+    setDisLikeCount(disLikeCount +1)
+   
+  }
+ 
   return (
     <div>
       <div className=" max-w-sm mx-auto bg-white hover:shadow-2xl  overflow-hidden border rounded-tl-3xl rounded-br-3xl border-x-indigo-500 border-y-indigo-500">
@@ -16,8 +35,11 @@ const LatestSurveyCard = ({ survey }) => {
             <h3> {category}</h3>
             <p>{description}</p>
             <div className="flex justify-start  gap-4">
-              <button className="text-xl  "><span><GrLike className="" />{like}</span></button>
-              <button className="text-xl  "><h4><GrDislike />{dislike}</h4></button>
+              <button onClick={handleLikeClick}
+              className="text-xl  "><span><GrLike className="" />{likeCount}</span></button>
+
+              <button onClick={handleDisLikeClick}
+               className="text-xl  "><h4><GrDislike />{disLikeCount}</h4></button>
             </div>
             <div className="card-actions justify-end">
             <Link to={`/details/${_id}`}>

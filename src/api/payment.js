@@ -10,3 +10,7 @@ export const saveBookingInfo = async (paymentInfo) => {
     const { data } = await axiosSecure.post("/payments", paymentInfo);
     return data;
   };
+  export const updateProUser = async (email) =>{
+    const {data} = await axiosSecure.patch(`/users/proUser/${email}`,{})
+    return data;
+  }
