@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const LatestSurveyCard = ({ survey }) => {
-  const { _id, title, category, description, like, dislike,  } =
-    survey;
+  const { _id, title, category, description, like,  disLike,  } =survey;
 
   // console.log(survey);
   const axiosSecure = useAxiosSecure();
@@ -15,15 +14,14 @@ const LatestSurveyCard = ({ survey }) => {
   const [disLikeCount , setDisLikeCount] = useState(0);
 
   const handleLikeClick = () =>{
-    setLikeCount(likeCount +1);
-    
+    setLikeCount(like +1); 
     axiosSecure.patch(`/survey/like/${_id}`)
     
   }
 
   const handleDisLikeClick = () =>{
-    setDisLikeCount(disLikeCount +1)
-   
+    setDisLikeCount(disLike +1)
+    axiosSecure.patch(`/survey/dislike/${_id}`)
   }
  
   return (

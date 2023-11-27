@@ -3,7 +3,7 @@ import { GrLike } from "react-icons/gr";
 import { GrDislike } from "react-icons/gr";
 
 const SurveyCards = ({ survey }) => {
-  const { _id, title, category, description, like, dislike, timestamp } =
+  const { _id, title, category, description, like, disLike, timestamp } =
     survey;
   console.log(survey);
   return (
@@ -16,7 +16,7 @@ const SurveyCards = ({ survey }) => {
             <p>{description}</p>
             <div className="flex justify-start  gap-4">
               <button className="text-xl  "><span><GrLike className="" />{like}</span></button>
-              <button className="text-xl  "><h4><GrDislike />{dislike}</h4></button>
+              <button className="text-xl  "><h4><GrDislike />{disLike}</h4></button>
             </div>
             <div className="card-actions justify-end">
               <button className="btn btn-primary">Details</button>

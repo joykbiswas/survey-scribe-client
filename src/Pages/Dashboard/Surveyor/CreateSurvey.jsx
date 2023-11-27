@@ -7,14 +7,14 @@ const CreateSurvey = () => {
     const form =event.target;
     const title = form.title.value;
     const category = form.category.value;
-    const like = form.like.value;
-    const dislike = form.dislike.value;
+    // const like = form.like.value;
+    // const dislike = form.dislike.value;
     const option = form.option.value;
     const description = form.description.value;
 
     // const timestamp = new Date().toISOString();
 
-    const addSurvey = {title,category,like,dislike,description, option }
+    const addSurvey = {title,category ,description, option }
     console.log(addSurvey);
     fetch('http://localhost:5000/survey',{
       method: 'POST',
@@ -82,7 +82,7 @@ const CreateSurvey = () => {
           </div>
 
           {/* form row 3*/}
-          <div className="md:flex ">
+          {/* <div className="md:flex ">
             <div className="form-control md:w-1/2">
               <label className="label">
                 <span className="label-text">like</span>
@@ -111,7 +111,7 @@ const CreateSurvey = () => {
                 />
               </label>
             </div>
-          </div>
+          </div> */}
           {/* form row 4*/}
           <div className="form-control md:w-1/2 ">
               <label className="label">
