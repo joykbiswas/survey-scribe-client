@@ -6,11 +6,14 @@ import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/logo.png"
 import useAdmin from "../../hooks/useAdmin";
 import useSurveyor from "../../hooks/useSurveyor";
+import useProUser from "../../hooks/useProUser";
   
 const Navbar = () => {
   const { user, logOut } = useAuth()
   const [isAdmin] = useAdmin();
   const [isSurveyor] =useSurveyor();
+  const [isProUser] = useProUser();
+  console.log(isProUser);
 
   // const handleSignOut = () => {
   //   logOut()
@@ -63,21 +66,26 @@ const Navbar = () => {
                       </NavLink>
                     </li>
 
-                    
+                    {
+                    isAdmin || isSurveyor ?<>
                     <li>
-                      <NavLink
-                        to="/dashboard"
-                        className={({ isActive, isPending }) =>
-                          isPending
-                            ? "pending"
-                            : isActive
-                            ? "text-red-500 text-xl underline"
-                            : "text-xl"
-                        }
-                      >
-                       Dashboard
-                      </NavLink>
-                    </li>
+                    <NavLink
+                      to="/dashboard"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "text-red-500 text-xl underline"
+                          : " text-xl "
+                      }
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                    </>
+                    : ''
+                  }
+
                     <li>
                       <NavLink
                         to="/survey"
@@ -228,9 +236,13 @@ const Navbar = () => {
         </div>
         
         <div className="navbar-end">
-          {/* <NavLink className="btn btn-sm" to="/login">
-            Login
-          </NavLink> */}
+         {
+          isProUser && <>
+           <div>
+            <img className="w-10" src="https://i.ibb.co/cNWkGRC/pro-bage.png" alt="" />
+          </div>
+          </>
+         }
 
           {user?.email ? (
             <div className="dropdown dropdown-end">

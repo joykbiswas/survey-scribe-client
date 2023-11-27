@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { GrLike } from "react-icons/gr";
-import { GrDislike } from "react-icons/gr";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { GrDislike, GrLike } from "react-icons/gr";
 import { Link } from "react-router-dom";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const LatestSurveyCard = ({ survey }) => {
-  const { _id, title, category, description, like, disLike } = survey;
+const FeaturedCard = ({survey}) => {
+    const { _id, title, category, description, like, disLike } = survey;
 
   // console.log(survey);
   const axiosSecure = useAxiosSecure();
@@ -22,10 +21,10 @@ const LatestSurveyCard = ({ survey }) => {
     setDisLikeCount(disLike + 1);
     axiosSecure.patch(`/survey/dislike/${_id}`);
   };
-
-  return (
-    <div>
-      <div className=" max-w-sm mx-auto bg-white hover:shadow-2xl  overflow-hidden border rounded-tl-3xl rounded-br-3xl border-x-indigo-500 border-y-indigo-500">
+  
+    return (
+        <div>
+            <div className=" max-w-sm mx-auto bg-white hover:shadow-2xl  overflow-hidden border rounded-tl-3xl rounded-br-3xl border-x-indigo-500 border-y-indigo-500">
         <div className="card   ">
           <div className="card-body text-sky-900">
             <h2 className="text-2xl font-semibold">{title}</h2>
@@ -68,8 +67,8 @@ const LatestSurveyCard = ({ survey }) => {
           </div>
         </div>
       </div>
-    </div>
-  );
+        </div>
+    );
 };
 
-export default LatestSurveyCard;
+export default FeaturedCard;

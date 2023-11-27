@@ -1,3 +1,4 @@
+import Typewriter from "react-ts-typewriter";
 
 const Banner = () => {
     return (
@@ -8,10 +9,26 @@ const Banner = () => {
             >
                 <h5 className="text-2xl font-semibold text-yellow-500">BEST BUSINESS PLATFORM OF</h5>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl text-white font-bold">ONLINE SURVEY</h2>
-                <h3 className="text-xl md:text-2xl  text-white hidden md:block">Join with us and get paid to speak your mind. The more surveys you take, the more money you earn. Join today</h3>
+
+                {/* <h3 className="text-xl md:text-2xl  text-white hidden md:block">Survey Smart, Read Deep, Explore Wide: Welcome to Survey Scribe!</h3>
+                <p>Your Gateway to Data Discovery with Survey Scribe!</p> */}
+               <div className="text-xl md:text-2xl  text-white hidden md:block ">
+                 
+               <h1>Survey Smart, Explore Wide:
+                    <Typewriter 
+                    speed={100}
+                    text={[" Welcome to Survey Scribe!  .", " Data Discovery with Survey Scribe!  ."]}
+                    loop={true}
+                    ></Typewriter>
+                </h1>
+               </div>
+
+
+
+
 
                 <div className="flex items-center ">
-                <button className="rounded-full bg-slate-300 text-blue-700 border  p-4 hover:text-green-600 hover:bg-white">Get Started </button>
+                <button className="rounded-full bg-slate-300 text-blue-700 border  p-4 hover:text-green-600 hover:bg-white">Explore Now </button>
                 
                 </div>
             </div>

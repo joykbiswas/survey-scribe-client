@@ -1,6 +1,6 @@
 import { FaHome, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import { FaRegRectangleList } from "react-icons/fa6";
+import {  FaRegRectangleList } from "react-icons/fa6";
 import { MdOutlinePayment } from "react-icons/md";
 import { ImStatsBars } from "react-icons/im";
 import { SiCheckmarx } from "react-icons/si";
@@ -15,7 +15,7 @@ const Dashboard = () => {
     return (
         <div className="flex">
             <div className="w-64 min-h-screen bg-orange-400 ">
-                <ul className="menu p-4">
+                <ul className="menu p-4 text-lg mt-8">
                     {/* admin  role */}
                    { isAdmin && <>
                    <li> 
@@ -42,53 +42,18 @@ const Dashboard = () => {
                         Create Survey</NavLink>
                     </li>
                     <li> 
-                        <NavLink to= '/dashboard/survey-details'> <FaRegRectangleList /> 
-                        Survey Details</NavLink>
+                        <NavLink to= '/dashboard/manage-survey'> <FaRegRectangleList /> 
+                        Manage Survey</NavLink>
                     </li>
                     <li> 
                         <NavLink to= '/dashboard/feedback'> <MdOutlineFeedback /> 
                         Feedback</NavLink>
+                    </li>
+                    <li> 
+                        <NavLink to= '/'> <FaHome /> 
+                        Home</NavLink>
                     </li>
                    </>}
-
-
-                    {/* {
-                        isAdmin ? <>
-                           <li> 
-                        <NavLink to= '/'> <FaHome></FaHome> 
-                         Home</NavLink>
-                    </li>
-                    <li> 
-                        <NavLink to= '/dashboard/manage-users'> <FaUsers />
-                        Manage Users</NavLink>
-                    </li>
-                    <li> 
-                        <NavLink to= '/dashboard/survey-status'><ImStatsBars /> 
-                        Survey Status</NavLink>
-                    </li>
-                    <li> 
-                        <NavLink to= '/dashboard/payment-history'> <MdOutlinePayment /> 
-                        Payment History</NavLink>
-                    </li>
-                        </>
-                        : <>
-                         <li> 
-                        <NavLink to= '/dashboard/create-survey'> <SiCheckmarx /> 
-                        Create Survey</NavLink>
-                    </li>
-                    <li> 
-                        <NavLink to= '/dashboard/survey-details'> <FaRegRectangleList /> 
-                        Survey Details</NavLink>
-                    </li>
-                    <li> 
-                        <NavLink to= '/dashboard/feedback'> <MdOutlineFeedback /> 
-                        Feedback</NavLink>
-                    </li>
-
-                        </>
-                    }
-                    */}
-
                    
                 </ul>
             </div>

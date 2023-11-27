@@ -1,14 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const CreateSurvey = () => {
+  const navigate = useNavigate()
   const   handleAddSurvey = (event) =>{
+   
     event.preventDefault();
 
     const form =event.target;
     const title = form.title.value;
     const category = form.category.value;
-    // const like = form.like.value;
-    // const dislike = form.dislike.value;
     const option = form.option.value;
     const description = form.description.value;
 
@@ -34,6 +35,7 @@ const CreateSurvey = () => {
           confirmButtonText: "Add survey",
         });
       }
+      navigate('/')
     })
   }
   return (
