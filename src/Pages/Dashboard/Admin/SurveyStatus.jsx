@@ -25,6 +25,7 @@ const SurveyStatus = () => {
                 <th></th>
                 <th>Category</th>
                 <th>Title</th>
+                <th>Publish Time </th>
                 <th>Like</th>
                 <th>Dislike</th>
                 
@@ -37,6 +38,7 @@ const SurveyStatus = () => {
                   <th>{index + 1}</th>
                   <td>{survey.category}</td>
                   <td>{survey.title}</td>
+                  <td>{survey.timestamp}</td>
                   <td>{survey.like}</td>
                   <td>{survey.dislike}</td>
                 </tr>

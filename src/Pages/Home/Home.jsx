@@ -7,6 +7,7 @@ import { useLoaderData } from "react-router-dom";
 import LatestSurvey from "./LatestSurvey";
 import Qna from "./Qna";
 import Featured from "./Featured/Featured";
+import OurServices from "./Discover/OurServices";
 // import FeatureSection from "./FeatureSection";
 
 const Home = () => {
@@ -20,7 +21,7 @@ const Home = () => {
       <Banner></Banner>
      <Featured></Featured>
       <LatestSurvey></LatestSurvey>
-     
+      <OurServices></OurServices>
       <Testimonials ></Testimonials>
       <Qna></Qna>
     </div>

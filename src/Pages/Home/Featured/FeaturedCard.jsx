@@ -4,7 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { GrDislike, GrLike } from "react-icons/gr";
 import { Link } from "react-router-dom";
 
-const FeaturedCard = ({survey}) => {
+const FeaturedCard = ({survey,refetch}) => {
     const { _id, title, category, description, like, disLike } = survey;
 
   // console.log(survey);
@@ -12,9 +12,11 @@ const FeaturedCard = ({survey}) => {
   const [likeCount, setLikeCount] = useState(like);
   const [disLikeCount, setDisLikeCount] = useState(disLike);
 
-  const handleLikeClick = () => {
+  const handleLikeClick =async () => {
     setLikeCount(like + 1);
-    axiosSecure.patch(`/survey/like/${_id}`);
+
+    await axiosSecure.patch(`/survey/like/${_id}`);
+    refetch();
   };
 
   const handleDisLikeClick = () => {

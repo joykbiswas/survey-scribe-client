@@ -7,10 +7,11 @@ const ManageSurvey = () => {
     const { data: survey = [], } = useQuery({
       queryKey: ["survey"],
       queryFn: async () => {
-        const res = await axiosSecure.get("/survey");
+        const res = await axiosSecure.get("/comments");
         return res.data;
       },
     });
+
     // console.log(survey);
     return (
         <div>
@@ -25,7 +26,8 @@ const ManageSurvey = () => {
               <tr>
                 <th></th>
                 <th>Category</th>
-                <th>Title</th>
+                <th>UserName</th>
+                <th>Comment</th>
                 <th>Like</th>
                 <th>Dislike</th>
                 
@@ -37,7 +39,8 @@ const ManageSurvey = () => {
                 <tr key={survey._id} className="bg-base-200">
                   <th>{index + 1}</th>
                   <td>{survey.category}</td>
-                  <td>{survey.title}</td>
+                  <td>{survey.name}</td>
+                  <td>{survey.comment}</td>
                   <td>{survey.like}</td>
                   <td>{survey.disLike}</td>
                 </tr>
