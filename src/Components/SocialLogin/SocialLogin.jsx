@@ -1,4 +1,4 @@
-import { FaGoogle } from "react-icons/fa";
+import { FcGoogle } from 'react-icons/fc'
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -34,7 +34,7 @@ const SocialLogin = () => {
             <div className="py-3 pl-8">
             <div className="divider"></div>
                 <button onClick={handleGoogleSignIn} className="btn">
-                    <FaGoogle className="mr-4"></FaGoogle>
+                <FcGoogle size={32} />
                     Google 
                 </button>
             </div>
