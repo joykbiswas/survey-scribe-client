@@ -1,22 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-
-const SurveyStatus = () => {
-    const axiosSecure = useAxiosSecure();
-    const { data: survey = [], } = useQuery({
-      queryKey: ["survey"],
-      queryFn: async () => {
-        const res = await axiosSecure.get("/survey");
-        return res.data;
-      },
-    });
-    console.log(survey);
-    return (
-        <div>
-        <div className="flex justify-evenly my-4">
-          <h4 className="text-3xl">Total ProUsers: {survey.length}</h4>
-        </div>
+const FeedBack = () => {
+  const axiosSecure = useAxiosSecure();
+  const { data: comment = [] } = useQuery({
+    queryKey: ["comment"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/comments");
+      return res.data;
+    },
+  });
+  return (
+    <div>
+      <div className="mt-14">
+        <div className="flex justify-evenly my-4"></div>
         <div className="overflow-x-auto">
           <table className="table w-full">
             {/* head */}
@@ -24,21 +21,20 @@ const SurveyStatus = () => {
               <tr>
                 <th></th>
                 <th>Category</th>
-                <th>Title</th>
-                <th>Publish Time </th>
+                <th>UserName</th>
+                <th>Comment</th>
                 <th>Like</th>
                 <th>Dislike</th>
-                
               </tr>
             </thead>
             <tbody>
               {/* row 1 */}
-              {survey.map((survey, index) => (
+              {comment.map((survey, index) => (
                 <tr key={survey._id} className="bg-base-200">
                   <th>{index + 1}</th>
                   <td>{survey.category}</td>
-                  <td>{survey.title}</td>
-                  <td>{survey.timestamp}</td>
+                  <td>{survey.name}</td>
+                  <td>{survey.comment}</td>
                   <td>{survey.like}</td>
                   <td>{survey.disLike}</td>
                 </tr>
@@ -47,7 +43,8 @@ const SurveyStatus = () => {
           </table>
         </div>
       </div>
-    );
+    </div>
+  );
 };
 
-export default SurveyStatus;
+export default FeedBack;

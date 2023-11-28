@@ -7,17 +7,16 @@ const ManageSurvey = () => {
     const { data: survey = [], } = useQuery({
       queryKey: ["survey"],
       queryFn: async () => {
-        const res = await axiosSecure.get("/comments");
+        const res = await axiosSecure.get("/survey");
         return res.data;
       },
     });
 
-    // console.log(survey);
     return (
         <div>
             <div>
         <div className="flex justify-evenly my-4">
-          <h4 className="text-3xl">Total ProUsers: {survey.length}</h4>
+          <h4 className="text-3xl">Total Survey: {survey.length}</h4>
         </div>
         <div className="overflow-x-auto">
           <table className="table w-full">
@@ -26,8 +25,8 @@ const ManageSurvey = () => {
               <tr>
                 <th></th>
                 <th>Category</th>
-                <th>UserName</th>
-                <th>Comment</th>
+                <th>Title</th>
+                <th>Time</th>
                 <th>Like</th>
                 <th>Dislike</th>
                 
@@ -39,8 +38,8 @@ const ManageSurvey = () => {
                 <tr key={survey._id} className="bg-base-200">
                   <th>{index + 1}</th>
                   <td>{survey.category}</td>
-                  <td>{survey.name}</td>
-                  <td>{survey.comment}</td>
+                  <td>{survey.title}</td>
+                  <td>{survey.timestamp}</td>
                   <td>{survey.like}</td>
                   <td>{survey.disLike}</td>
                 </tr>

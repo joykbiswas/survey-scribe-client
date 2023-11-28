@@ -5,13 +5,25 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useProUser from "../../hooks/useProUser";
-
+// import { useQuery } from "@tanstack/react-query";
 const SurveyDetails = () => {
-  const [isProUser] = useProUser()
-  console.log(isProUser);
+  const [isProUser] = useProUser();  
   const surveys = useLoaderData();
   const { _id,category, description, disLike, like, title } = surveys;
+
   const axiosSecure = useAxiosSecure();
+  // const { data: comment = [],  } = useQuery({
+  //   queryKey: ["comment"],
+  //   queryFn: async (survey_id) => {
+  //     const res = await axiosSecure.get(`/comments/${survey_id}`);
+  //     return res.data;
+  //   },
+  // });
+// console.log('comment--',comment);
+
+
+
+  // const axiosSecure = useAxiosSecure();
   const [likeCount, setLikeCount] = useState(like);
   const [disLikeCount, setDisLikeCount] = useState(disLike);
 
@@ -27,7 +39,6 @@ const SurveyDetails = () => {
     axiosSecure.patch(`/survey/dislike/${_id}`);
   };
   const { user } = useAuth();
-  console.log("user-->", user);
 
   const handleComment = (event) => {
     event.preventDefault();
@@ -45,6 +56,7 @@ const SurveyDetails = () => {
       like,
       title,
       comment,
+      survey_id:_id,
     };
     console.log(apply);
     fetch('http://localhost:5000/comments',{

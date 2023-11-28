@@ -114,20 +114,7 @@ const Navbar = () => {
                         Pricing
                       </NavLink>
                     </li>
-                    <li>
-                      <NavLink
-                        to="/bid_requests"
-                        className={({ isActive, isPending }) =>
-                          isPending
-                            ? "pending"
-                            : isActive
-                            ? "text-red-500 text-xl underline"
-                            : "text-xl"
-                        }
-                      >
-                        Bid Requests
-                      </NavLink>
-                    </li>
+                    
                     <li>
                       {user ? (
                         <button onClick={logOut} className="btn btn-sm">
@@ -214,20 +201,7 @@ const Navbar = () => {
                       Pricing
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink
-                      to="/bid_requests"
-                      className={({ isActive, isPending }) =>
-                        isPending
-                          ? "pending"
-                          : isActive
-                          ? "text-red-500 text-xl underline"
-                          : " text-xl "
-                      }
-                    >
-                      Bid Requests
-                    </NavLink>
-                  </li>
+                  
                 </ul>
               </div>
             </div>

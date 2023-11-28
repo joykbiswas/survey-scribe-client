@@ -15,6 +15,7 @@ import SurveyDetails from "../Components/SurveryDetails/SurveyDetails";
 import PaymentHistory from "../Pages/Dashboard/Admin/PaymentHistory";
 import SurveyStatus from "../Pages/Dashboard/Admin/SurveyStatus";
 import ManageSurvey from "../Pages/Dashboard/Surveyor/ManageSurvey";
+import FeedBack from "../Pages/Dashboard/Surveyor/FeedBack";
 // import SurveyDetails from "../Components/SurveryDetails/SurveyDetails";
 // import Payment from "../Pages/Dashboard/Payment/Payment";
 
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
           path:'manage-survey',
           element: <ManageSurvey></ManageSurvey>
         },
+        {
+          path: 'feedback',
+          element: <FeedBack></FeedBack>
+        }
         
       ]
     }

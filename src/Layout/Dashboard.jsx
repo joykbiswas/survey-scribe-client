@@ -18,10 +18,7 @@ const Dashboard = () => {
                 <ul className="menu p-4 text-lg mt-8">
                     {/* admin  role */}
                    { isAdmin && <>
-                   <li> 
-                        <NavLink to= '/'> <FaHome></FaHome> 
-                         Home</NavLink>
-                    </li>
+                  
                     <li> 
                         <NavLink to= '/dashboard/manage-users'> <FaUsers />
                         Manage Users</NavLink>
@@ -33,6 +30,10 @@ const Dashboard = () => {
                     <li> 
                         <NavLink to= '/dashboard/payment-history'> <MdOutlinePayment /> 
                         Payment History</NavLink>
+                    </li>
+                    <li> 
+                        <NavLink to= '/'> <FaHome></FaHome> 
+                         Home</NavLink>
                     </li>
                    </>} 
 
