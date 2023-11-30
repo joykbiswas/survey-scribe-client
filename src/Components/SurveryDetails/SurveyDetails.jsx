@@ -64,7 +64,7 @@ const SurveyDetails = () => {
       survey_id: _id,
     };
     console.log(apply);
-    fetch("http://localhost:5000/comments", {
+    fetch("https://survey-scribe-server.vercel.app/comments", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         {
             path:'/',
             element:<Home></Home>,
-            // loader: () =>fetch('http://localhost:5000/survey')
+            // loader: () =>fetch('https://survey-scribe-server.vercel.app/survey')
         },
         {
             path: '/login',
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         {
           path: 'survey',
           element:<OurSurvey></OurSurvey>,
-          loader: () =>fetch('http://localhost:5000/survey')
+          loader: () =>fetch('https://survey-scribe-server.vercel.app/survey')
         },
         {
           path:'pricing',
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
         {
           path: "/details/:id",
           element:<SurveyDetails></SurveyDetails>,
-          loader:({params}) =>fetch(`http://localhost:5000/survey/${params.id}`)
+          loader:({params}) =>fetch(`https://survey-scribe-server.vercel.app/survey/${params.id}`)
         }
         
       ]

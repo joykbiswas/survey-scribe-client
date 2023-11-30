@@ -17,7 +17,7 @@ const CreateSurvey = () => {
 
     const addSurvey = {title,category ,description, option }
     console.log(addSurvey);
-    fetch('http://localhost:5000/survey',{
+    fetch('https://survey-scribe-server.vercel.app/survey',{
       method: 'POST',
       headers: {
         "content-type": "application/json",
