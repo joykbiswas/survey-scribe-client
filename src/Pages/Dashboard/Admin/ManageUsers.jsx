@@ -58,7 +58,7 @@ const ManageUsers = () => {
     });
   };
   return (
-    <div>
+    <div className="mt-8">
       <div className="flex justify-evenly my-4">
         <h2 className="text-3xl">Filter </h2>
         <h4 className="text-3xl">Total Users: {users.length}</h4>

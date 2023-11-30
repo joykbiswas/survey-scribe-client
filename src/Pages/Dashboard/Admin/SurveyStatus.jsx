@@ -15,7 +15,7 @@ const SurveyStatus = () => {
     return (
         <div>
         <div className="flex justify-evenly my-4">
-          <h4 className="text-3xl">Total ProUsers: {survey.length}</h4>
+          <h4 className="text-3xl">Total Survey: {survey.length}</h4>
         </div>
         <div className="overflow-x-auto">
           <table className="table w-full">

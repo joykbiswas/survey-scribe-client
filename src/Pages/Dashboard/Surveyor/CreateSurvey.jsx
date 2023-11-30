@@ -17,7 +17,7 @@ const CreateSurvey = () => {
 
     const addSurvey = {title,category ,description, option }
     console.log(addSurvey);
-    fetch('https://survey-scribe-server.vercel.app/survey',{
+    fetch('http://localhost:5000/survey',{
       method: 'POST',
       headers: {
         "content-type": "application/json",
@@ -41,7 +41,7 @@ const CreateSurvey = () => {
   return (
     <div>
       <div className="bg-[#fbf3de] max-w-full mx-auto  p-24">
-        <h2 className="text-3xl font-bold">Create Survey</h2>
+        <h2 className="text-4xl font-bold text-center pb-12">Create Survey</h2>
         <form onSubmit={handleAddSurvey}>
           {/* form row 1*/}
           <div className="md:flex ">
@@ -155,7 +155,7 @@ const CreateSurvey = () => {
           {/* <input type="hidden" name="timestamp" value={new Date().toISOString()} /> */}
           <input
             type="submit"
-            value="Add"
+            value="Add Survey"
             className="btn w-full bg-[#f5d789]"
           />
         </form>

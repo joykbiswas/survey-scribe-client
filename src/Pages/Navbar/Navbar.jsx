@@ -12,16 +12,16 @@ const Navbar = () => {
   const { user, logOut } = useAuth()
   const [isAdmin] = useAdmin();
   const [isSurveyor] =useSurveyor();
-  const [isProUser] = useProUser();
+  const [isProUser,] = useProUser();
   console.log(isProUser);
-
-  // const handleSignOut = () => {
-  //   logOut()
-  //     .then((result) => {
-  //       console.log("user sign out", result);
-  //     })
-  //     .catch((error) => console.error(error));
-  // };
+ 
+  const handleSignOut = () => {
+    logOut()
+      .then((result) => {
+        console.log("user sign out", result);
+      })
+      .catch((error) => console.error(error));
+  };
 
   return (
     <div className="border-b   ">
@@ -117,7 +117,7 @@ const Navbar = () => {
                     
                     <li>
                       {user ? (
-                        <button onClick={logOut} className="btn btn-sm">
+                        <button onClick={handleSignOut} className="btn btn-sm">
                           Sign Out
                         </button>
                       ) : (
@@ -242,7 +242,7 @@ const Navbar = () => {
                   </button>
                 </li>
                 <li>
-                  <button onClick={logOut} className="btn btn-sm">
+                  <button onClick={handleSignOut} className="btn btn-sm">
                     Sign Out
                   </button>
                 </li>
@@ -256,7 +256,7 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:flex">
           {user ? (
-            <button onClick={logOut} className="btn btn-sm">
+            <button onClick={handleSignOut} className="btn btn-sm">
               Sign Out
             </button>
           ) : (

@@ -1,20 +1,19 @@
-
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const ManageSurvey = () => {
-    const axiosSecure = useAxiosSecure();
-    const { data: survey = [], } = useQuery({
-      queryKey: ["survey"],
-      queryFn: async () => {
-        const res = await axiosSecure.get("/survey");
-        return res.data;
-      },
-    });
+  const axiosSecure = useAxiosSecure();
+  const { data: survey = [] } = useQuery({
+    queryKey: ["survey"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/survey");
+      return res.data;
+    },
+  });
 
-    return (
-        <div>
-            <div>
+  return (
+    <div>
+      <div className="mt-12">
         <div className="flex justify-evenly my-4">
           <h4 className="text-3xl">Total Survey: {survey.length}</h4>
         </div>
@@ -29,7 +28,6 @@ const ManageSurvey = () => {
                 <th>Time</th>
                 <th>Like</th>
                 <th>Dislike</th>
-                
               </tr>
             </thead>
             <tbody>
@@ -48,8 +46,8 @@ const ManageSurvey = () => {
           </table>
         </div>
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default ManageSurvey;

@@ -1,37 +1,42 @@
 import { GrDislike, GrLike } from "react-icons/gr";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useProUser from "../../hooks/useProUser";
+import { useQuery } from "@tanstack/react-query";
 // import { useQuery } from "@tanstack/react-query";
 const SurveyDetails = () => {
-  const [isProUser] = useProUser();  
+  const { id } = useParams();
+  const [isProUser, ] = useProUser();
   const surveys = useLoaderData();
-  const { _id,category, description, disLike, like, title } = surveys;
+  const { _id, category, description, disLike, like, title } = surveys;
 
   const axiosSecure = useAxiosSecure();
-  // const { data: comment = [],  } = useQuery({
-  //   queryKey: ["comment"],
-  //   queryFn: async (survey_id) => {
-  //     const res = await axiosSecure.get(`/comments/${survey_id}`);
-  //     return res.data;
-  //   },
-  // });
-// console.log('comment--',comment);
-
-
+  const { data: comments = [],refetch } = useQuery({
+    queryKey: ["comments"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/comments/${id}`);
+      // refetch();
+      console.log(res);
+      return res.data;
+     
+    },
+    
+  });
+ 
+  console.log("comment--", comments);
 
   // const axiosSecure = useAxiosSecure();
   const [likeCount, setLikeCount] = useState(like);
   const [disLikeCount, setDisLikeCount] = useState(disLike);
 
-  const handleLikeClick =async () => {
+  const handleLikeClick = async () => {
     setLikeCount(like + 1);
 
     await axiosSecure.patch(`/survey/like/${_id}`);
-    
+    // refetch();
   };
 
   const handleDisLikeClick = () => {
@@ -56,31 +61,27 @@ const SurveyDetails = () => {
       like,
       title,
       comment,
-      survey_id:_id,
+      survey_id: _id,
     };
     console.log(apply);
-    fetch('https://survey-scribe-server.vercel.app/comments',{
-      method:'POST',
-      headers:{
-        'content-type': 'application/json'
+    fetch("http://localhost:5000/comments", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
       },
-      body:JSON.stringify(apply)
+      body: JSON.stringify(apply),
     })
-    .then(res =>res.json())
-    .then(data =>{
-      console.log(data);
-      if(data.insertedId){
-        Swal.fire(
-          'Good job!',
-          'Your Comment Successfully',
-          'success'
-        )
-      }
-    })
-    // navigate( '/my_bids')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire("Good job!", "Your Comment Successfully", "success");
+          refetch()
+        }
+      });
     
+    // refetch();
   };
-
 
   return (
     <div className="my-7">
@@ -91,7 +92,7 @@ const SurveyDetails = () => {
             <h3 className="text-3xl font-semibold"> {category}</h3>
             <p className="text-2xl">{description}</p>
             <div className="flex justify-start  gap-4">
-            <div className="flex items-center text-2xl">
+              <div className="flex items-center text-2xl">
                 <button
                   onClick={handleLikeClick}
                   className="hover:text-green-600"
@@ -100,8 +101,8 @@ const SurveyDetails = () => {
                 </button>
                 <p className="text-xl">{likeCount}</p>
               </div>
-              
-               <div className="flex items-center text-2xl">
+
+              <div className="flex items-center text-2xl">
                 <button
                   onClick={handleDisLikeClick}
                   className="hover:text-red-400 "
@@ -138,25 +139,40 @@ const SurveyDetails = () => {
                 className="input input-bordered w-full"
                 required
               />
-             {
-              isProUser ? <>
-               <input
-                type="submit"
-                value="Send"
-                className="btn w-full bg-[#72c4f6] my-4"
-              /> </>
-              :<>
-              
-              <input
-              disabled
-                type="submit"
-                value="Send"
-                className="btn w-full bg-[#72c4f6] my-4"
-              />
-              <p className="text-sm text-red-300">only pro user comment</p>
-              </>
-             }
+              {isProUser ? (
+                <>
+                  <input
+                    type="submit"
+                    value="Send"
+                    className="btn w-full bg-[#72c4f6] my-4"
+                  />
+                </>
+              ) : (
+                <>
+                  <input
+                    disabled
+                    type="submit"
+                    value="Send"
+                    className="btn w-full bg-[#72c4f6] my-4"
+                  />
+                  <p className="text-sm text-red-300">only pro user comment</p>
+                </>
+              )}
             </form>
+            <div>
+              {comments.map((comment) => (
+                <div key={comment._id} className="chat chat-start">
+                  <div className="">
+                    <div className="w-10 ">
+                      {comment.name}
+                    </div>
+                  </div>
+                  <div className="chat-bubble">
+                  {comment.comment}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import useAuth from "./useAuth";
 const useProUser = () => {
     const {user, loading} = useAuth();
     const axiosSecure = useAxiosSecure();
-    const {data: isProUser, isPending: isProUserLoading } = useQuery({
+    const {data: isProUser, isPending: isProUserLoading ,refetch} = useQuery({
         queryKey: [user?.email, 'isProUser'],
         enabled: !loading,
         queryFn: async() =>{
@@ -15,7 +15,7 @@ const useProUser = () => {
             return res.data?.proUser
         }
     });
-    return [isProUser,isProUserLoading]
+    return [isProUser,isProUserLoading,refetch]
 
 };
 

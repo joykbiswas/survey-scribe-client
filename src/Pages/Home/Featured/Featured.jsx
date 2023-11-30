@@ -20,7 +20,7 @@ const Featured = () => {
 
   return (
     <div className="my-16">
-      <div className="text-6xl font-bold text-center mb-8">Top Featured </div>
+      <div className="text-6xl font-bold text-center mb-8 ">Top Featured </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {
         surveys.map(survey =><FeaturedCard key={survey._id}

@@ -9,7 +9,7 @@ import Footer from "../../Pages/Footer/Footer";
 const Root = () => {
     const location = useLocation();
     console.log(location);
-    const noHeaderFooter = location.pathname.includes('/login') || location.pathname.includes('register')
+    const noHeaderFooter = location.pathname.includes('/login', ) || location.pathname.includes('/signup')
     return (
         <div className="max-w-screen-xl mx-auto">
             { noHeaderFooter|| <Navbar></Navbar>}

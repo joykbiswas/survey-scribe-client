@@ -8,6 +8,7 @@ import { ImSpinner9 } from 'react-icons/im'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../../../hooks/useAuth'
 import { createPaymentIntent, saveBookingInfo, updateProUser,  } from '../../../api/payment'
+import useProUser from '../../../hooks/useProUser'
 
 // import Swal from 'sweetalert2'
 
@@ -16,6 +17,8 @@ const CheckoutForm = ({ bookingInfo, closeModal, }) => {
   const stripe = useStripe()
   const elements = useElements()
   const { user } = useAuth()
+  const [ , ,refetch] = useProUser();
+
   const [cardError, setCardError] = useState('')
   const [clientSecret, setClientSecret] = useState('')
   const [processing, setProcessing] = useState(false);
@@ -117,6 +120,7 @@ const CheckoutForm = ({ bookingInfo, closeModal, }) => {
         navigate('/')
         toast.success(text);
         toast.success("You are now Pro-user")
+        refetch()
       }catch (err){
         console.log(err);
         toast.error(err.message)
