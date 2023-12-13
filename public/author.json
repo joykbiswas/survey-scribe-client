@@ -1,0 +1,40 @@
+[
+    {
+      "id": "1",
+      "img": "https://i.ibb.co/305Jxrp/1702316735515.jpg",
+      "name": "Joy Biswas",
+      "profession": " Founder"
+    },
+    {
+      "id": "2",
+      "img": "https://i.ibb.co/RT5Svg4/author4.jpg",
+      "name": "Jane Smith",
+      "profession": "Team Lead"
+    },
+    {
+      "id": "3",
+      "img": "https://i.ibb.co/4JYdKmf/author3.jpg",
+      "name": "David J.",
+      "profession": "surveyor"
+    },
+    {
+      "id": "4",
+      "img": "https://i.ibb.co/7RJJdJS/author9.jpg",
+      "name": "Emily B.",
+      "profession": " Manager"
+    },
+    {
+      "id": "5",
+      "img": "https://i.ibb.co/hD0Mcgp/author6.jpg",
+      "name": "Michael D.",
+      "profession": " Manager"
+    },
+    {
+      "id": "6",
+      "img": "https://i.ibb.co/mJppMW4/author5.jpg",
+      "name": "Sarah W.",
+      "profession": "surveyor"
+    }
+    
+    
+  ]

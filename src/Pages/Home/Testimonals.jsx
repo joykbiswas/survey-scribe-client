@@ -12,12 +12,12 @@ const Testimonals = () => {
                 <div>
                   <img
                     className="w-24 rounded-full"
-                    src="https://i.ibb.co/hD0Mcgp/author6.jpg"
+                    src="https://i.ibb.co/Fm5pLJN/Untitled-6.jpg"
                     alt=""
                   />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-semibold">John D</h3>
+                  <h3 className="text-2xl font-semibold">Joy KB</h3>
                   <h2 className="text-xl">Marketing Manager</h2>
                 </div>
               </div>
@@ -74,7 +74,7 @@ const Testimonals = () => {
                 <div>
                   <img
                     className="w-24 rounded-full"
-                    src="https://i.ibb.co/Fm5pLJN/Untitled-6.jpg"
+                    src="https://i.ibb.co/hD0Mcgp/author6.jpg"
                     alt=""
                   />
                 </div>

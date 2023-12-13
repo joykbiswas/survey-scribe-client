@@ -65,6 +65,20 @@ const Navbar = () => {
                         Home
                       </NavLink>
                     </li>
+                    <li>
+                    <NavLink
+                      to="/about"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "text-red-500 text-xl underline"
+                          : "text-xl "
+                      }
+                    >
+                      About Us
+                    </NavLink>
+                  </li>
 
                     {
                     isAdmin || isSurveyor ?<>
@@ -150,6 +164,20 @@ const Navbar = () => {
                       }
                     >
                       Home
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/about"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "text-red-500 text-xl underline"
+                          : "text-xl "
+                      }
+                    >
+                      About Us
                     </NavLink>
                   </li>
 
